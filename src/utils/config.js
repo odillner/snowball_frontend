@@ -1,13 +1,11 @@
 require('dotenv').config()
 
-let PORT = process.env.PORT
-let API_URL = process.env.DB_URL
+let API_URL = process.env.REACT_APP_API_URL
 
 if (process.env.NODE_ENV === 'test') {
-    API_URL = process.env.TEST_DB_URL
+    API_URL = process.env.REACT_APP_API_URL
 }
 
 module.exports = {
-    API_URL,
-    PORT
+    API_URL
 }

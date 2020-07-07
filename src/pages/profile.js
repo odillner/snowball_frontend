@@ -1,20 +1,14 @@
 import React, {useState, useEffect} from 'react'
 
-import userService from '../services/users'
-export default {
-    Profile : (props) => {
-        const [user, setUser] =  useState({})
 
-        useEffect(() => {
-            setUser(userService
-                .read(user.id)
-            )
-        }, [])
+const Profile = (props) => {
+    const [user, setUser] =  useState({})
 
-        return (
-            <div>
-                {user.name}
-            </div>
-        )
-    }
+    return (
+        <div>
+            <h1>profile</h1>
+        </div>
+    )
 }
+
+export default Profile
