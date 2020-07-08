@@ -1,6 +1,4 @@
-import config from '../utils/config'
 import axios from 'axios'
-import logger from '../utils/logger'
 
 const baseUrl = 'http://localhost:3005/api/users/'
 
