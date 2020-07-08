@@ -5,8 +5,12 @@ const Navbar = () => {
     return(
         <div className="navbar">
             <Link to="/">Home</Link>
-            <Link to="/profile">Profile</Link>
+            <Link to="/ownprofile">Profile</Link>
             <Link to="/newuser" className="right">Sign Up</Link>
+            <Link to="/allusers">All Users</Link>
+            <Link to="/newsnowball">New Snowball</Link>
+            <Link to="/allsnowballs">All Snowballs</Link>
+
         </div>
     )
 }

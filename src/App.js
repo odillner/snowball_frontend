@@ -12,11 +12,15 @@ import Navbar from "./components/Navbar";
 
 /* pages */
 import Home from './pages/Home'
-import Profile from './pages/Profile'
+import OwnProfile from './pages/OwnProfile'
 import NewUser from './pages/NewUser'
+import AllUsers from './pages/AllUsers'
+import NewSnowball from './pages/NewSnowball'
+import AllSnowballs from './pages/AllSnowballs';
 
 
 function App() {
+    const curr_user = "5f05c8e8a482b61eb86cd04f"
 
     return (
         <div className="App">
@@ -29,11 +33,20 @@ function App() {
                     <Route exact path="/">
                         <Home />
                     </Route>
-                    <Route path="/profile">
-                        <Profile />
+                    <Route path="/ownprofile">
+                        <OwnProfile id={curr_user}/>
                     </Route>
                     <Route path="/newuser">
                         <NewUser />
+                    </Route>
+                    <Route path="/allusers">
+                        <AllUsers />
+                    </Route>
+                    <Route path="/allsnowballs" id={curr_user}>
+                        <AllSnowballs />
+                    </Route>
+                    <Route path="/newsnowball" id={curr_user}>
+                        <NewSnowball />
                     </Route>
                 </Switch>
                 </div>

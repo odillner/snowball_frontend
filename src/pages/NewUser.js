@@ -10,15 +10,18 @@ const NewUser = (props) => {
         event.preventDefault()
 
         const newUser = {
-            name: nameInput,
+            username: nameInput,
             email: emailInput,
             password: passwordInput
         }
 
         const res = await userService.create(newUser)
-        console.log(res)
-    }
 
+        setNameInput('')
+        setEmailInput('')
+        setPasswordInput('')
+    }
+    
     const handleNameForm = (event) => {
         setNameInput(event.target.value)
     }
@@ -35,7 +38,7 @@ const NewUser = (props) => {
         <div>
         <form>
           <div>
-            user name: <input value={nameInput} onChange={handleNameForm}/>
+            name: <input value={nameInput} onChange={handleNameForm}/>
           </div>
           <div>
             email: <input value={emailInput} onChange={handleEmailForm}/>

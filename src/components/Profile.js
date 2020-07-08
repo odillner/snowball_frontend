@@ -5,7 +5,11 @@ const Profile = (props) => {
     const [user, setUser] =  useState({})
 
     useEffect(() => {
-        setCurrentUser(props.id)
+        if (props.id) {
+            setCurrentUser(props.id)
+        } else if (props.user) {
+            setUser(props.user)
+        }
     }, [])
 
     const setCurrentUser = async (id) => {
@@ -15,12 +19,11 @@ const Profile = (props) => {
     }
 
     return (
-        <div>
+        <div className='profile'>
             <h1>profile</h1>
-            <h1>username: {user.name} </h1>
+            <h1>username: {user.username} </h1>
             <h1>email: {user.email} </h1>
-            <h1>password: {user.password} </h1>
-
+            <h1>id: {user.id} </h1>
         </div>
     )
 }
