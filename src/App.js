@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './App.css'
-import Profile from './pages/profile'
-import userService from './services/users'
+import Profile from './pages/Profile'
+import NewUser from './pages/NewUser'
 
 function App() {
-    useEffect(() => {
-        const res = userService.getAll()
-
-    }, [])
 
     return (
         <div className="App">
-            <Profile/>
+            <Profile id='5f059ee966f3ec1a480243ca'/>
+            <NewUser/>
         </div>
     )
 }

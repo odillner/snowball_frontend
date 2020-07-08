@@ -1,7 +1,8 @@
 import config from '../utils/config'
 import axios from 'axios'
+import logger from '../utils/logger'
 
-const baseUrl = config.API_URL + '/snowballs/'
+const baseUrl =  'http://localhost:3005/api/snowballs/'
 
 export default {
     getAll: async () => {
@@ -14,6 +15,11 @@ export default {
         return res.data
     },
 
+    read: async (id) => {
+        const res = await axios.get(baseUrl + id)
+        return res.data
+    },
+    
     remove: async (id) => {
         const res = await axios.delete(baseUrl + id)
         return res.data
