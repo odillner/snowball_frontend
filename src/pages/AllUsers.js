@@ -6,16 +6,14 @@ const AllUsers = (props) => {
     const [users, setUsers] =  useState([])
 
     useEffect(() => {
-        setCurrentUser()
+        setCurrentUsers()
     }, [])
 
-    const setCurrentUser = async () => {
+    const setCurrentUsers = async () => {
         const res = await userService.getAll()
 
         setUsers(res)
     }
-
-    
 
     return (
         <div>

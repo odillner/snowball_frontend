@@ -1,25 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import userService from '../services/users'
+import React from 'react'
 
 import Snowballs from './Snowballs'
 
 const Profile = (props) => {
-    const [user, setUser] =  useState({})
-
-    useEffect(() => {
-        if (props.id) {
-            setCurrentUser(props.id)
-        } else if (props.user) {
-            setUser(props.user)
-        }
-
-    }, [])
-
-    const setCurrentUser = async (id) => {
-        const res = await userService.read(id)
-
-        setUser(res)
-    }
+    const user = props.user
 
     return (
         <div className='profile'>

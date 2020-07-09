@@ -1,6 +1,7 @@
 import axios from 'axios'
+import {API_URL} from '../utils/config'
 
-const baseUrl = 'http://localhost:3005/api/users/'
+const baseUrl = API_URL + 'api/users/'
 
 export default {
     getAll: async () => {

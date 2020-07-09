@@ -6,6 +6,8 @@ const NewUser = (props) => {
     const [emailInput, setEmailInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
 
+    const display = props.display
+
     const signUpUser = async (event) => {
         event.preventDefault()
 
@@ -14,8 +16,12 @@ const NewUser = (props) => {
             email: emailInput,
             password: passwordInput
         }
-
-        const res = await userService.create(newUser)
+        try {
+            await userService.create(newUser)
+            display.message('Successfully created user')
+        } catch (err) {
+            display.error('Failed to create user')
+        }
 
         setNameInput('')
         setEmailInput('')

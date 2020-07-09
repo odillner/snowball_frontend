@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react'
 import logInService from '../services/login'
 
 const LogIn = (props) => {
-    const [notication, setNotification] = useState('')
     const [nameInput, setNameInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
+
+    const display = props.display
 
     const logInUser = async (event) => {
         event.preventDefault()
@@ -18,9 +19,9 @@ const LogIn = (props) => {
             const res = await logInService.auth(user)
 
             props.setSession(res)
-            setNotification('Logged in successfully')
+            display.message("Successfully logged in")
         } catch (err) {
-            setNotification('Failed to log in')
+            display.error("Failed to log in, password or username incorrect")
         }
         setNameInput('')
         setPasswordInput('')
@@ -36,7 +37,7 @@ const LogIn = (props) => {
 
     return (
         <div>
-            <h1>{notication}</h1>
+
         <form>
           <div>
             name: <input value={nameInput} onChange={handleNameForm}/>

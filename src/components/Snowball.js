@@ -1,30 +1,21 @@
-import React, {useState, useEffect} from 'react'
-import snowballService from '../services/snowballs'
+import React from 'react'
 
 const Snowball = (props) => {
-    const [snowball, setSnowball] =  useState({})
+    const snowball = props.snowball
 
-    useEffect(() => {
-        if (props.id) {
-            setCurrentSnowball(props.id)
-        } else if (props.snowball) {
-            setSnowball(props.snowball)
-        }
-    }, [])
-
-    const setCurrentSnowball = async (id) => {
-        const res = await snowballService.read(id)
-
-        setSnowball(res)
+    if (snowball) {
+        return (
+            <div className='snowball'>
+                <p>name: {snowball.name} </p>
+                <p>owner id: {snowball.owner} </p>
+                <p>snowball id: {snowball.id} </p>
+            </div>
+        )
+    } else {
+        return (
+            <div/>
+        )
     }
-
-    return (
-        <div className='snowball'>
-            <p>name: {snowball.name} </p>
-            <p>owner id: {snowball.owner} </p>
-            <p>snowball id: {snowball.id} </p>
-        </div>
-    )
 }
 
 export default Snowball
