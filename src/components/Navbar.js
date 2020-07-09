@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 const Navbar = () => {
     return(
         <div className="navbar">
-            <Link to="/">Home</Link>
+            <Link to="/">LogIn</Link>
             <Link to="/ownprofile">Profile</Link>
             <Link to="/newuser" className="right">Sign Up</Link>
             <Link to="/allusers">All Users</Link>

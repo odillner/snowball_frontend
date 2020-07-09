@@ -26,5 +26,5 @@ export default {
     update: async (id, newObject) => {
         const res = await axios.put(`${baseUrl}${id}`, newObject)
         return res.data
-    }
+    },
 }

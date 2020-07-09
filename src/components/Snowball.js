@@ -20,7 +20,6 @@ const Snowball = (props) => {
 
     return (
         <div className='snowball'>
-            <h1>snowball</h1>
             <p>name: {snowball.name} </p>
             <p>owner id: {snowball.owner} </p>
             <p>snowball id: {snowball.id} </p>

@@ -9,10 +9,10 @@ const NewSnowBall = (props) => {
 
         const newSnowball = {
             name: nameInput,
-            owner: "5f05c8e8a482b61eb86cd04f"
+            owner: props.user.id
         }
 
-        const res = await SnowballService.create(newSnowball)
+        await SnowballService.create(newSnowball)
 
         setNameInput('')
     }
@@ -21,18 +21,26 @@ const NewSnowBall = (props) => {
         setNameInput(event.target.value)
     }
 
-    return (
-        <div>
-        <form>
-          <div>
-            name: <input value={nameInput} onChange={handleNameForm}/>
-          </div>
-          <div>
-            <button type="submit" onClick={createSnowball}>Create Snowball</button>
-          </div>
-        </form>
-      </div>
-    )
+    if (props.user) {
+        return (
+            <div>
+                <form>
+                    <div>
+                        name: <input value={nameInput} onChange={handleNameForm}/>
+                    </div>
+                    <div>
+                        <button type="submit" onClick={createSnowball}>Create Snowball</button>
+                    </div>
+                </form>
+        </div>
+        )
+    } else {
+        return (
+            <div>
+                log in to create snowball
+            </div>
+        )
+    }
 }
 
 export default NewSnowBall
