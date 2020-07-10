@@ -1,49 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link
-} from "react-router-dom";
+} from "react-router-dom"
 
 /* components */
-import Header from "./components/Header";
-import Navbar from "./components/Navbar";
-import Notification from './components/Notification';
+import Header from "./components/Header"
+import Navbar from "./components/Navbar"
+import Notification from './components/Notification'
 
 /* pages */
+import Home from './pages/Home'
+import Friends from './pages/Friends'
 import OwnProfile from './pages/OwnProfile'
 import NewUser from './pages/NewUser'
 import AllUsers from './pages/AllUsers'
 import LogIn from './pages/LogIn'
 import NewSnowball from './pages/NewSnowball'
-import AllSnowballs from './pages/AllSnowballs';
+import AllSnowballs from './pages/AllSnowballs'
 
 /* services */
 import userService from './services/users'
 
+/* utils */
+
 function App() {
-    const [user, setUser] = useState(null)
+    const [currUser, setUser] = useState(null)
+    /*used for displaying messages to user*/
     const [notification, setNotification] = useState(null);
 
+    /*sets the current user session from login etc*/
     const setSession = async (session) => {
-        let user = await userService.read(session.user.id)
+        let user = await userService.getById(session.user.id)
         user.token = session.token
         setUser(user)
     }
 
-    const message = (message) => {
-        setNotification({text: message, type: 'message'});
+    /*displays message to user*/
+    const info = (info) => {
+        setNotification({text: info, type: 'info'});
         setTimeout(() => {setNotification(null)}, 5000)
     }
-    
+    /*displays error to user*/
     const error = (error) => {
         setNotification({text: error, type: 'error'});
         setTimeout(() => {setNotification(null)}, 5000)
     }
 
-    const display = {message, error}
+    const display = {info, error}
+    
 
+    /*main routing etc*/
     return (
         <div className="App">
             <Router>
@@ -55,22 +64,28 @@ function App() {
 
                     <Switch>
                         <Route exact path="/">
-                            <LogIn setSession={setSession} display={display}/>
+                            <Home user={currUser} display={display}/>
+                        </Route>
+                        <Route exact path="/login">
+                            <LogIn user={currUser} display={display} setSession={setSession}/>
                         </Route>
                         <Route path="/ownprofile">
-                            <OwnProfile user={user} display={display}/>
+                            <OwnProfile user={currUser} display={display}/>
+                        </Route>
+                        <Route path="/friends">
+                            <Friends user={currUser} display={display}/>
                         </Route>
                         <Route path="/newuser">
-                            <NewUser display={display}/>
+                            <NewUser user={currUser} display={display} setSession={setSession}/>
                         </Route>
                         <Route path="/allusers">
-                            <AllUsers display={display}/>
+                            <AllUsers user={currUser} display={display}/>
                         </Route>
                         <Route path="/allsnowballs">
-                            <AllSnowballs display={display}/>
+                            <AllSnowballs user={currUser} display={display}/>
                         </Route>
                         <Route path="/newsnowball">
-                            <NewSnowball user={user} display={display}/>
+                            <NewSnowball user={currUser} display={display}/>
                         </Route>
                     </Switch>
                 </div>

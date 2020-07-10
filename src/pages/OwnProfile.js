@@ -1,14 +1,14 @@
 import React from 'react'
 import Profile from '../components/Profile'
 
+/*own profile page, uses current user to display*/
 const OwnProfile = (props) => {
+    const user = props.user
 
-    console.log(props.user)
-
-    if (props.user) {
+    if (user) {
         return (
             <div>
-                <Profile user={props.user}/>
+                <Profile user={user}/>
             </div>
         )
     } else {

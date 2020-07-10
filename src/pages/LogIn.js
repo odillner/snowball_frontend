@@ -6,6 +6,7 @@ const LogIn = (props) => {
     const [passwordInput, setPasswordInput] = useState('')
 
     const display = props.display
+    const user=props.user
 
     const logInUser = async (event) => {
         event.preventDefault()
@@ -19,7 +20,7 @@ const LogIn = (props) => {
             const res = await logInService.auth(user)
 
             props.setSession(res)
-            display.message("Successfully logged in")
+            display.info("Successfully logged in")
         } catch (err) {
             display.error("Failed to log in, password or username incorrect")
         }
@@ -35,22 +36,29 @@ const LogIn = (props) => {
         setPasswordInput(event.target.value)
     }
 
-    return (
-        <div>
-
-        <form>
-          <div>
-            name: <input value={nameInput} onChange={handleNameForm}/>
-          </div>
-          <div>
-            password: <input value={passwordInput} onChange={handlePasswordForm}/>
-          </div>
-          <div>
-            <button type="submit" onClick={logInUser}>Log In</button>
-          </div>
-        </form>
-      </div>
-    )
+    if (user) {
+        return (
+            <div>
+                already logged in
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <form>
+                    <div>
+                        name: <input value={nameInput} onChange={handleNameForm}/>
+                    </div>
+                    <div>
+                        password: <input value={passwordInput} onChange={handlePasswordForm}/>
+                    </div>
+                    <div>
+                        <button type="submit" onClick={logInUser}>Log In</button>
+                    </div>
+                </form>
+            </div>
+        )
+    }
 }
 
 export default LogIn

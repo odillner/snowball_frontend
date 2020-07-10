@@ -1,11 +1,26 @@
 import axios from 'axios'
-import {API_URL} from '../utils/config'
 
-const baseUrl = API_URL + 'api/login/'
+import {API_URL} from '../utils/config'
+import logger from '../utils/logger'
+
+const extension = 'api/login/'
+const baseUrl = API_URL + extension
 
 export default {
+
+    /*authenticates user log in, return session token+userdata*/
     auth: async (user) => {
-        const res = await axios.post(baseUrl, user)
-        return res.data
+        try {
+            logger.info(extension, 'Authenticating user:', user)
+
+            const res = await axios.post(baseUrl, user)
+
+            logger.info(extension, 'User authenticated', res)
+
+            return res.data
+        } catch (err) {
+            logger.error(extension, err)
+            throw err
+        }
     },
 }

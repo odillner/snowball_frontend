@@ -5,15 +5,20 @@ import Profile from '../components/Profile'
 const AllUsers = (props) => {
     const [users, setUsers] =  useState([])
 
+    const display = props.display;
+
     useEffect(() => {
-        setCurrentUsers()
+        getUsers()
     }, [])
 
-    const setCurrentUsers = async () => {
-        const res = await userService.getAll()
-
-        setUsers(res)
-    }
+    const getUsers = async () => {
+        try {
+            const res = await userService.getAll()
+            setUsers(res)
+        } catch (err) {
+            display.error("Error fetching users")
+        }
+    } 
 
     return (
         <div>

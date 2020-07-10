@@ -5,14 +5,19 @@ import Snowball from '../components/Snowball'
 const AllSnowballs = (props) => {
     const [snowballs, setSnowballs] =  useState([])
 
+    const display = props.display
+
     useEffect(() => {
         getSnowballs()
     }, [])
 
     const getSnowballs = async () => {
-        const res = await snowballService.getAll()
-
-        setSnowballs(res)
+        try {
+            const res = await snowballService.getAll()
+            setSnowballs(res)
+        } catch (err) {
+            display.error("Error fetching snowballs")
+        }
     }
 
     return (

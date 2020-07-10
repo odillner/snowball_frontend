@@ -1,19 +1,25 @@
 import React, {useState, useEffect} from 'react'
-import SnowballService from '../services/snowballs'
+import snowballService from '../services/snowballs'
 
 const NewSnowBall = (props) => {
     const [nameInput, setNameInput] = useState('')
+
+    const user = props.user
+    const display = props.display
 
     const createSnowball = async (event) => {
         event.preventDefault()
 
         const newSnowball = {
             name: nameInput,
-            owner: props.user.id
+            owner: user.id
         }
-
-        await SnowballService.create(newSnowball)
-
+        try {
+            await snowballService.create(newSnowball)
+            display.info('Snowball successfully created')
+        } catch (err) {
+            display.error('Error creating snowball')
+        }
         setNameInput('')
     }
     
@@ -21,7 +27,7 @@ const NewSnowBall = (props) => {
         setNameInput(event.target.value)
     }
 
-    if (props.user) {
+    if (user) {
         return (
             <div>
                 <form>

@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import userService from '../services/users'
+import logInService from '../services/login'
 
+/*sign up page, creates new users*/
 const NewUser = (props) => {
     const [nameInput, setNameInput] = useState('')
     const [emailInput, setEmailInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
 
     const display = props.display
+    const user = props.user
 
     const signUpUser = async (event) => {
         event.preventDefault()
@@ -16,15 +19,36 @@ const NewUser = (props) => {
             email: emailInput,
             password: passwordInput
         }
+
         try {
             await userService.create(newUser)
-            display.message('Successfully created user')
+            display.info('Successfully created user')
+            logInUser()
         } catch (err) {
             display.error('Failed to create user')
         }
 
         setNameInput('')
         setEmailInput('')
+        setPasswordInput('')
+    }
+
+    
+    const logInUser = async () => {
+        const user = {
+            username: nameInput,
+            password: passwordInput
+        }
+
+        try {
+            const res = await logInService.auth(user)
+
+            props.setSession(res)
+            display.info("Successfully logged in")
+        } catch (err) {
+            display.error("Failed to log in, password or username incorrect")
+        }
+        setNameInput('')
         setPasswordInput('')
     }
     
@@ -39,25 +63,33 @@ const NewUser = (props) => {
     const handlePasswordForm = (event) => {
         setPasswordInput(event.target.value)
     }
-
-    return (
-        <div>
-        <form>
-          <div>
-            name: <input value={nameInput} onChange={handleNameForm}/>
-          </div>
-          <div>
-            email: <input value={emailInput} onChange={handleEmailForm}/>
-          </div>
-          <div>
-            password: <input value={passwordInput} onChange={handlePasswordForm}/>
-          </div>
-          <div>
-            <button type="submit" onClick={signUpUser}>Sign Up</button>
-          </div>
-        </form>
-      </div>
-    )
+    
+    if (user) {
+        return (
+            <div>
+                already logged in
+            </div>
+        )
+    } else {
+        return (
+            <div>
+            <form>
+            <div>
+                name: <input value={nameInput} onChange={handleNameForm}/>
+            </div>
+            <div>
+                email: <input value={emailInput} onChange={handleEmailForm}/>
+            </div>
+            <div>
+                password: <input value={passwordInput} onChange={handlePasswordForm}/>
+            </div>
+            <div>
+                <button type="submit" onClick={signUpUser}>Sign Up</button>
+            </div>
+            </form>
+        </div>
+        )
+    }
 }
 
 export default NewUser
