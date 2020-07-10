@@ -11,7 +11,7 @@ const Profile = (props) => {
             <p>username: {user.username} </p>
             <p>email: {user.email} </p>
             <p>id: {user.id} </p>
-            <Snowballs title='own snowballs:' snowballs={user.own_snowballs}/>
+            <Snowballs title='snowballs:' snowballs={user.own_snowballs}/>
             <Snowballs title='participating in:' snowballs={user.part_snowballs}/>
         </div>
     )

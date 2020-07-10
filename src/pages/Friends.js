@@ -26,6 +26,7 @@ const Friends = (props) => {
             display.error('Error adding friend')
         }
 
+        getFriends()
         setNameInput('')
     }
     
