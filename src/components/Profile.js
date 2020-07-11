@@ -2,7 +2,8 @@ import React from 'react'
 
 import Snowballs from './Snowballs'
 
-const Profile = (props) => {
+
+const Full = (props) => {
     const user = props.user
 
     return (
@@ -11,10 +12,27 @@ const Profile = (props) => {
             <p>username: {user.username} </p>
             <p>email: {user.email} </p>
             <p>id: {user.id} </p>
-            <Snowballs title='snowballs:' snowballs={user.own_snowballs}/>
-            <Snowballs title='participating in:' snowballs={user.part_snowballs}/>
+            <Snowballs.Full title='snowballs:' snowballs={user.own_snowballs}/>
+            <Snowballs.Full title='participating in:' snowballs={user.part_snowballs}/>
         </div>
     )
 }
 
-export default Profile
+const Mini = (props) => {
+    const user = props.user
+
+    return (
+        <div className='profile'>
+            <b>profile</b>
+            <p>username: {user.username} </p>
+            <p>id: {user.id} </p>
+            <Snowballs.Mini title='snowballs:' snowballs={user.own_snowballs}/>
+        </div>
+    )
+}
+
+
+export default {
+    Full,
+    Mini
+}

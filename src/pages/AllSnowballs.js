@@ -24,7 +24,7 @@ const AllSnowballs = (props) => {
         <div>
             {snowballs.map(snowball => {
                 return (
-                    <Snowball snowball={snowball} key={snowball.name}/>
+                    <Snowball.Full snowball={snowball} key={snowball.name}/>
                 )
             })}
         </div>

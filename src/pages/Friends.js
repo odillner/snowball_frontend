@@ -19,14 +19,29 @@ const Friends = (props) => {
         event.preventDefault()
 
         try {
-            const newFriend = await userService.getByName(nameInput)
-            const res = await userService.addFriend(user, newFriend)
+            const res = await userService.addFriendByName(user, nameInput)
+
+            setFriends(friends.concat(res))
             display.info('Friend successfully added')
         } catch (err) {
             display.error('Error adding friend')
         }
 
-        getFriends()
+        setNameInput('')
+    }
+
+    const removeFriend = async (event) => {
+        event.preventDefault()
+
+        try {
+            const res = await userService.removeFriendByName(user, nameInput)
+
+            setFriends(friends.filter(friend => friend.username !== res.username))
+            display.info('Friend successfully removed')
+        } catch (err) {
+            display.error('Error removing friend')
+        }
+
         setNameInput('')
     }
     
@@ -56,9 +71,10 @@ const Friends = (props) => {
                     <form>
                         <div>
                             name: <input value={nameInput} onChange={handleNameForm}/>
+                            <button type="submit" onClick={addFriend}>Add Friend</button>
+                            <button type="submit" onClick={removeFriend}>Remove Friend</button>
                         </div>
                         <div>
-                            <button type="submit" onClick={addFriend}>Add Friend</button>
                         </div>
                     </form>
 

@@ -99,6 +99,7 @@ export default {
         }
     },
 
+    /* populates friends field with user objects */
     getFriends: async (user) => {
         try {
             logger.info(extension, 'Fetching user friends', user.id)
@@ -114,6 +115,7 @@ export default {
         }
     },
 
+    /* adds given friend object to given user objects friend field */
     addFriend: async (user, friend) => {
         try {
             logger.info(extension, 'Adding friend,', friend, 'to user', user)
@@ -123,6 +125,46 @@ export default {
             logger.info(extension, 'Friend added to user', res)
 
             return res.data
+        } catch (err) {
+            logger.error(extension, err)
+            throw err
+        }
+    },
+
+    /* adds given friend to given user objects friend field */
+    addFriendByName: async (user, friend) => {
+        try {
+            logger.info(extension, 'Finding friend,', friend)
+            const newFriend = await axios.get(baseUrl + 'name/' + friend)
+
+            if (!newFriend) {
+                let err = new Error('Resource not found')
+                err.name = 'NotFoundError'
+                throw err
+            }
+
+            logger.info(extension, 'Adding friend,', newFriend.data, 'to user', user)
+            const res = await axios.post(baseUrl + 'friends/' + user.id, newFriend.data)
+
+            logger.info(extension, 'Friend added to user', res)
+            return newFriend.data
+        } catch (err) {
+            logger.error(extension, err)
+            throw err
+        }
+    },
+
+    /* adds given friend to given user objects friend field */
+    removeFriendByName: async (user, friend) => {
+        try {
+            logger.info(extension, 'Finding friend,', friend)
+            const oldFriend = await axios.get(baseUrl + 'name/' + friend)
+
+            logger.info(extension, 'Removing friend,', oldFriend, 'from user', user)
+            const res = await axios.delete(baseUrl + 'friends/' + user.id, oldFriend)
+
+            logger.info(extension, 'Friend removed from user', res)
+            return oldFriend.data
         } catch (err) {
             logger.error(extension, err)
             throw err

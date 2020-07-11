@@ -24,7 +24,7 @@ const AllUsers = (props) => {
         <div>
             {users.map(user => {
                 return (
-                    <Profile user={user} key={user.username}/>
+                    <Profile.Full user={user} key={user.username}/>
                 )
             })}
         </div>

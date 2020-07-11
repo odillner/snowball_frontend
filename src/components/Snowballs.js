@@ -2,7 +2,7 @@ import React from 'react'
 
 import Snowball from './Snowball'
 
-const Snowballs = (props) => {
+const Full = (props) => {
     const snowballs = props.snowballs
 
     if (!snowballs) {
@@ -12,14 +12,10 @@ const Snowballs = (props) => {
     } else {
         if (snowballs[0]) {
             return (
-                <div className="profile">
+                <div className="wrapper">
                     <h2>{props.title}</h2>
                     {snowballs.map(snowball => {
-                        if (snowball.id) {
-                            return <Snowball snowball={snowball} key={snowball.id}></Snowball>
-                        } else {
-                            return <Snowball id={snowball} key={snowball}></Snowball>
-                        }
+                        return <Snowball.Full snowball={snowball} key={snowball.id}/>
                     })}
                 </div>
             )
@@ -29,9 +25,33 @@ const Snowballs = (props) => {
             )
         }
     }
-    
-
-
 }
 
-export default Snowballs
+const Mini = (props) => {
+    const snowballs = props.snowballs
+
+    if (!snowballs) {
+        return (
+            <div/>
+        )
+    } else {
+        if (snowballs[0]) {
+            return (
+                <div className="wrapper">
+                    {snowballs.map(snowball => {
+                        return <Snowball.Mini snowball={snowball} key={snowball.id}/>
+                    })}
+                </div>
+            )
+        } else {
+            return (
+                <div/>
+            )
+        }
+    }
+}
+
+export default {
+    Full,
+    Mini
+}

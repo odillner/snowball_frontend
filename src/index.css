@@ -38,22 +38,32 @@ body {
 
 .profile {   
     flex: 80%;
-    background-color: #333;
-    padding: 20px;
+    background-color: #666;
+    padding: 10px;
     flex-wrap: wrap;
     display: inline-block;
-    border-style: solid;
+    border: 2px solid;
 }
 
 .snowball {   
     flex: 80%;
-    background-color: blue;
-    padding: 20px;
+    background-color: #333;
+    padding: 10px;
     flex-wrap: wrap;
     display: inline-block;
-    border-style: solid;
+    border: 2px solid;
 }
 
+.wrapper {   
+    flex: 80%;
+    background-color: #1abc9c;
+    padding: 10px;
+    flex-wrap: wrap;
+    display: inline-block;
+    border: 2px solid;
+}
+
+/* displays error notification */
 .error {
     color: red;
     background: lightgrey;
@@ -63,7 +73,7 @@ body {
     padding: 10px;
     margin-bottom: 10px;
 }
-
+/* displays message notification */
 .info {
 color: green;
 background: lightgrey;

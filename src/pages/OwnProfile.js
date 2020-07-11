@@ -8,7 +8,7 @@ const OwnProfile = (props) => {
     if (user) {
         return (
             <div>
-                <Profile user={user}/>
+                <Profile.Full user={user}/>
             </div>
         )
     } else {

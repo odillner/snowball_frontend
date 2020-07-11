@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MiniProfile from './MiniProfile'
+import Profile from './Profile'
 
 const FriendsList = (props) => {
     const friends = props.friends
@@ -11,9 +11,13 @@ const FriendsList = (props) => {
         )
     } else {
         return (
-            <div className='profile'>
+            <div className='wrapper'>
                 {friends.map(friend => {
-                    return (<MiniProfile user={friend} key={friend.username}/>)
+                    if (friend) {
+                        return (<Profile.Mini user={friend} key={friend.username}/>)
+                    } else {
+                        return (<div/>)
+                    }
                 })}
             </div>
         )
