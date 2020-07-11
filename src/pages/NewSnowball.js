@@ -40,13 +40,13 @@ const NewSnowBall = (props) => {
                 </form>
         </div>
         )
-    } else {
-        return (
-            <div>
-                log in to create snowball
-            </div>
-        )
     }
+
+    return (
+        <div>
+            log in to create snowball
+        </div>
+    )
 }
 
 export default NewSnowBall

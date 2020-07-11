@@ -168,5 +168,18 @@ export default {
             logger.error(extension, err)
             throw err
         }
+    },
+
+    populateSnowballData: async (user) => {
+        try {
+            logger.info(extension, 'Populating user', user)
+            const res = await axios.get(baseUrl + 'snowballs/' + user.id)
+
+            logger.info(extension, 'User populated', res)
+            return res.data
+        } catch (err) {
+            logger.error(extension, err)
+            throw err
+        }
     }
 }

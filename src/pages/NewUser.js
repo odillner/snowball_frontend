@@ -64,13 +64,7 @@ const NewUser = (props) => {
         setPasswordInput(event.target.value)
     }
     
-    if (user) {
-        return (
-            <div>
-                already logged in
-            </div>
-        )
-    } else {
+    if (!user) {
         return (
             <div>
             <form>
@@ -90,6 +84,12 @@ const NewUser = (props) => {
         </div>
         )
     }
+
+    return (
+        <div>
+            already logged in
+        </div>
+    )
 }
 
 export default NewUser

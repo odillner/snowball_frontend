@@ -5,11 +5,7 @@ import Profile from './Profile'
 const FriendsList = (props) => {
     const friends = props.friends
 
-    if (!friends[0]) {
-        return (
-            <div/>
-        )
-    } else {
+    if (friends[0]) {
         return (
             <div className='wrapper'>
                 {friends.map(friend => {
@@ -22,6 +18,10 @@ const FriendsList = (props) => {
             </div>
         )
     }
+
+    return (
+        <div/>
+    )
 }
 
 export default FriendsList

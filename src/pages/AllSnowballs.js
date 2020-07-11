@@ -20,14 +20,20 @@ const AllSnowballs = (props) => {
         }
     }
 
+    if (snowballs) {
+        return (
+            <div>
+                {snowballs.map(snowball => {
+                    return (
+                        <Snowball.Full snowball={snowball} key={snowball.name}/>
+                    )
+                })}
+            </div>
+        )
+    }
+
     return (
-        <div>
-            {snowballs.map(snowball => {
-                return (
-                    <Snowball.Full snowball={snowball} key={snowball.name}/>
-                )
-            })}
-        </div>
+        <div/>
     )
 }
 

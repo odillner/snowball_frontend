@@ -39,12 +39,6 @@ const LogIn = (props) => {
     if (user) {
         return (
             <div>
-                already logged in
-            </div>
-        )
-    } else {
-        return (
-            <div>
                 <form>
                     <div>
                         name: <input value={nameInput} onChange={handleNameForm}/>
@@ -59,6 +53,13 @@ const LogIn = (props) => {
             </div>
         )
     }
+
+
+    return (
+        <div>
+            already logged in
+        </div>
+    )
 }
 
 export default LogIn

@@ -12,11 +12,11 @@ const Full = (props) => {
                 <p>snowball id: {snowball.id} </p>
             </div>
         )
-    } else {
-        return (
-            <div/>
-        )
-    }
+    } 
+
+    return (
+        <div/>
+    )
 }
 
 
@@ -31,11 +31,11 @@ const Mini = (props) => {
                 <p>snowball id: <br/>{snowball.id} </p>
             </div>
         )
-    } else {
-        return (
-            <div/>
-        )
     }
+
+    return (
+        <div/>
+    )
 }
 
 export default {

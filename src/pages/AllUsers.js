@@ -20,14 +20,20 @@ const AllUsers = (props) => {
         }
     } 
 
+    if (users) {
+        return (
+            <div>
+                {users.map(user => {
+                    return (
+                        <Profile.Full user={user} key={user.username}/>
+                    )
+                })}
+            </div>
+        )
+    }
+
     return (
-        <div>
-            {users.map(user => {
-                return (
-                    <Profile.Full user={user} key={user.username}/>
-                )
-            })}
-        </div>
+        <div/>
     )
 }
 

@@ -60,13 +60,7 @@ const Friends = (props) => {
         }
     } 
 
-    if (!user) {
-        return (
-            <div>
-                log in to add friends
-            </div>
-        )
-    } else {
+    if (user) {
         return (
             <div>
                 <div>
@@ -84,7 +78,13 @@ const Friends = (props) => {
                 </div>
             </div>
         )
-    }
+    }    
+
+    return (
+        <div>
+            log in to add friends
+        </div>
+    )
 }
 
 export default Friends
