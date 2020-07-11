@@ -37,6 +37,8 @@ const Friends = (props) => {
             const res = await userService.removeFriendByName(user, nameInput)
 
             setFriends(friends.filter(friend => friend.username !== res.username))
+
+
             display.info('Friend successfully removed')
         } catch (err) {
             display.error('Error removing friend')

@@ -2,7 +2,6 @@ import axios from 'axios'
 
 import {API_URL} from '../utils/config'
 import logger from '../utils/logger'
-import Profile from '../components/Profile'
 
 const extension = 'api/users/'
 const baseUrl = API_URL + extension
