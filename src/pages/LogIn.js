@@ -5,19 +5,18 @@ const LogIn = (props) => {
     const [nameInput, setNameInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
 
-    const display = props.display
-    const user=props.user
+    const {user, display}=props.state
 
     const logInUser = async (event) => {
         event.preventDefault()
 
-        const user = {
+        const newUser = {
             username: nameInput,
             password: passwordInput
         }
 
         try {
-            const res = await logInService.auth(user)
+            const res = await logInService.auth(newUser)
 
             props.setSession(res)
             display.info("Successfully logged in")

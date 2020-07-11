@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import snowballService from '../services/snowballs'
 
+/*snow ball creation page*/
 const NewSnowBall = (props) => {
     const [nameInput, setNameInput] = useState('')
 
-    const user = props.user
-    const display = props.display
+    const {user, display} = props.state
 
     const createSnowball = async (event) => {
         event.preventDefault()

@@ -2,14 +2,14 @@ import React, {useState} from 'react'
 import userService from '../services/users'
 import logInService from '../services/login'
 
-/*sign up page, creates new users*/
+/*user creation page*/
 const NewUser = (props) => {
+    /* form handlers*/
     const [nameInput, setNameInput] = useState('')
     const [emailInput, setEmailInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
 
-    const display = props.display
-    const user = props.user
+    const {user, display} = props.state
 
     const signUpUser = async (event) => {
         event.preventDefault()
@@ -23,32 +23,12 @@ const NewUser = (props) => {
         try {
             await userService.create(newUser)
             display.info('Successfully created user')
-            logInUser()
         } catch (err) {
             display.error('Failed to create user')
         }
 
         setNameInput('')
         setEmailInput('')
-        setPasswordInput('')
-    }
-
-    
-    const logInUser = async () => {
-        const user = {
-            username: nameInput,
-            password: passwordInput
-        }
-
-        try {
-            const res = await logInService.auth(user)
-
-            props.setSession(res)
-            display.info("Successfully logged in")
-        } catch (err) {
-            display.error("Failed to log in, password or username incorrect")
-        }
-        setNameInput('')
         setPasswordInput('')
     }
     

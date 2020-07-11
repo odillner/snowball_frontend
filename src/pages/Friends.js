@@ -3,15 +3,14 @@ import userService from '../services/users'
 import FriendsList from '../components/FriendsList'
 
 const Friends = (props) => {
+    const {user, users, display} = props.state
+
     const [nameInput, setNameInput] = useState('')
-    const [friends, setFriends] =  useState([])
-
-    const display = props.display;
-    const user = props.user
-
+    const [friends, setFriends] = useState(null)
+    
     useEffect(() => {
-        if (user) {
-            getFriends()
+        if (user && !friends) {
+            setFriends(user.friends)
         }
     }, [])
 
@@ -20,8 +19,9 @@ const Friends = (props) => {
 
         try {
             const res = await userService.addFriendByName(user, nameInput)
+            const newFriends = friends.concat(res)
 
-            setFriends(friends.concat(res))
+            setFriends(newFriends)
             display.info('Friend successfully added')
         } catch (err) {
             display.error('Error adding friend')
@@ -35,10 +35,9 @@ const Friends = (props) => {
 
         try {
             const res = await userService.removeFriendByName(user, nameInput)
+            const newFriends = friends.filter(friend => friend.username !== res.username)
 
-            setFriends(friends.filter(friend => friend.username !== res.username))
-
-
+            setFriends(newFriends)
             display.info('Friend successfully removed')
         } catch (err) {
             display.error('Error removing friend')
@@ -51,16 +50,7 @@ const Friends = (props) => {
         setNameInput(event.target.value)
     }
 
-    const getFriends = async () => {
-        try {
-            const res = await userService.getFriends(user)
-            setFriends(res)
-        } catch (err) {
-            display.error("Error fetching friends")
-        }
-    } 
-
-    if (user) {
+    if (friends) {
         return (
             <div>
                 <div>

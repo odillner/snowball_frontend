@@ -26,16 +26,8 @@ import userService from './services/users'
 /* utils */
 
 function App() {
-    const [currUser, setUser] = useState(null)
     /*used for displaying messages to user*/
     const [notification, setNotification] = useState(null);
-
-    /*sets the current user session from login etc*/
-    const setSession = async (session) => {
-        let user = await userService.getById(session.user.id)
-        user.token = session.token
-        setUser(user)
-    }
 
     /*displays message to user*/
     const info = (info) => {
@@ -48,43 +40,68 @@ function App() {
         setTimeout(() => {setNotification(null)}, 5000)
     }
 
-    const display = {info, error}
-    
+    /*contains current application state*/
+    const [state, setState] = useState({
+        user: null,
+        users: null,
+        display: {info,error}
+    })
 
+    /*starts application session & sets state*/
+    const setSession = async (session) => {
+        let user = await userService.getById(session.user.id)
+        user.token = session.token
+
+        const users = await userService.getAll()
+        setState({
+            user: user,
+            users: users,
+            display: {info,error}
+        })
+    }
+
+    const endSession = async () => {
+        setState({
+            user: null,
+            users: null,
+            display: {info,error}
+        })
+    }
+    
     /*main routing etc*/
     return (
         <div className="App">
             <Router>
                 <div>
                     <Header></Header>
-                    <Navbar></Navbar>
+                    <Navbar state={state}></Navbar>
 
                     <Notification message={notification}/>
 
                     <Switch>
                         <Route exact path="/">
-                            <Home user={currUser} display={display}/>
+                            <Home state={state}/>
                         </Route>
                         <Route exact path="/login">
-                            <LogIn user={currUser} display={display} setSession={setSession}/>
+                            <LogIn state={state} setSession={setSession}/>
                         </Route>
                         <Route path="/ownprofile">
-                            <OwnProfile user={currUser} display={display}/>
+                            <OwnProfile state={state}/>
                         </Route>
                         <Route path="/friends">
-                            <Friends user={currUser} display={display}/>
+                            <Friends state={state}/>
                         </Route>
                         <Route path="/newuser">
-                            <NewUser user={currUser} display={display} setSession={setSession}/>
+                            <NewUser state={state}/>
                         </Route>
                         <Route path="/allusers">
-                            <AllUsers user={currUser} display={display}/>
+                            <AllUsers state={state}/>
                         </Route>
                         <Route path="/allsnowballs">
-                            <AllSnowballs user={currUser} display={display}/>
+                            <AllSnowballs state={state}/>
                         </Route>
                         <Route path="/newsnowball">
-                            <NewSnowball user={currUser} display={display}/>
+                            <NewSnowball state={state}/>
                         </Route>
                     </Switch>
                 </div>

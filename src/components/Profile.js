@@ -35,6 +35,7 @@ const Mini = (props) => {
                 <b>profile</b>
                 <p>username: {user.username} </p>
                 <p>id: {user.id} </p>
+                <Snowballs.Mini snowballs={user.ownSnowballs}/>
             </div>
         )
     }
