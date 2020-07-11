@@ -36,7 +36,7 @@ const LogIn = (props) => {
         setPasswordInput(event.target.value)
     }
 
-    if (user) {
+    if (!user) {
         return (
             <div>
                 <form>
